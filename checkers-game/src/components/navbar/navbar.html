@@ -1,0 +1,68 @@
+<nav class="bg-gray-900 text-white shadow-md fixed w-full z-50 top-0 left-0">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between h-16 items-center">
+
+      <!-- Logo -->
+      <div class="flex-shrink-0 text-2xl font-bold text-blue-400">
+        <a routerLink="/">CheckersGame</a>
+      </div>
+
+      <!-- Desktop Menu -->
+      <div class="hidden md:flex items-center space-x-6">
+        <a routerLink="/" class="hover:text-blue-400 transition">Inicio</a>
+        <a routerLink="/jugar" class="hover:text-blue-400 transition">Jugar</a>
+
+        <!-- Solo mostrar si está logueado -->
+        <a *ngIf="isLoggedIn" routerLink="/ranking" class="hover:text-blue-400 transition">Ranking</a>
+        <a *ngIf="isLoggedIn" routerLink="/perfil" class="hover:text-blue-400 transition">Perfil</a>
+
+        <!-- Botones de sesión -->
+        <div class="ml-4">
+          <button *ngIf="!isLoggedIn"
+                  (click)="login()"
+                  class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl transition">
+            Iniciar sesión
+          </button>
+
+          <button *ngIf="isLoggedIn"
+                  (click)="logout()"
+                  class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition">
+            Cerrar sesión
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="md:hidden">
+        <button (click)="toggleMenu()" class="focus:outline-none">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path *ngIf="!isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16" />
+            <path *ngIf="isMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div *ngIf="isMenuOpen" class="md:hidden bg-gray-800">
+    <a routerLink="/" class="block px-4 py-2 hover:bg-gray-700">Inicio</a>
+    <a routerLink="/jugar" class="block px-4 py-2 hover:bg-gray-700">Jugar</a>
+    <a *ngIf="isLoggedIn" routerLink="/ranking" class="block px-4 py-2 hover:bg-gray-700">Ranking</a>
+    <a *ngIf="isLoggedIn" routerLink="/perfil" class="block px-4 py-2 hover:bg-gray-700">Perfil</a>
+
+    <button *ngIf="!isLoggedIn"
+            (click)="login()"
+            class="block w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white">
+      Iniciar sesión
+    </button>
+
+    <button *ngIf="isLoggedIn"
+            (click)="logout()"
+            class="block w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white">
+      Cerrar sesión
+    </button>
+  </div>
+</nav>

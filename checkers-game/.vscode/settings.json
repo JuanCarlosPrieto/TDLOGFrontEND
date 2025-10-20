@@ -1,0 +1,14 @@
+{
+  // Evita que marque las directivas de Tailwind como error
+  "css.lint.unknownAtRules": "ignore",
+
+  // Habilita sugerencias Tailwind (si tienes la extensión instalada)
+  "tailwindCSS.includeLanguages": {
+    "html": "html",
+    "typescript": "typescript"
+  },
+
+  // Recomendado: activa Prettier si lo usas
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}
