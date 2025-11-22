@@ -1,0 +1,154 @@
+<div class="min-h-screen bg-gray-900 text-white flex items-center justify-center px-4 pt-24">
+  <div class="w-full max-w-md bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-blue-400 mb-2">Create account</h1>
+    <p class="text-gray-300 mb-6">Join to play Checkers and appear in the ranking.</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <!-- Username -->
+      <label class="block mb-1">Username</label>
+      <input
+        type="text"
+        formControlName="username"
+        class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2"
+        placeholder="e.g. juanp"
+        autocomplete="username"
+      />
+      <div *ngIf="f['username'].touched && f['username'].invalid" class="text-red-400 text-sm mt-1">
+        <span *ngIf="f['username'].errors?.['required']">Username is required.</span>
+        <span *ngIf="f['username'].errors?.['minlength']">Must be at least 3 characters.</span>
+        <span *ngIf="f['username'].errors?.['maxlength']">Maximum 24 characters.</span>
+      </div>
+
+      <!-- Name -->
+      <label class="block mt-4 mb-1">First name</label>
+      <input
+        type="text"
+        formControlName="name"
+        class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2"
+        placeholder="Your first name"
+        autocomplete="given-name"
+      />
+      <div *ngIf="f['name'].touched && f['name'].invalid" class="text-red-400 text-sm mt-1">
+        <span *ngIf="f['name'].errors?.['maxlength']">Maximum 100 characters.</span>
+      </div>
+
+      <!-- Surname -->
+      <label class="block mt-4 mb-1">Last name</label>
+      <input
+        type="text"
+        formControlName="surname"
+        class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2"
+        placeholder="Your last name"
+        autocomplete="family-name"
+      />
+      <div *ngIf="f['surname'].touched && f['surname'].invalid" class="text-red-400 text-sm mt-1">
+        <span *ngIf="f['surname'].errors?.['maxlength']">Maximum 100 characters.</span>
+      </div>
+
+      <!-- Email -->
+      <label class="block mt-4 mb-1">Email address</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2"
+        placeholder="yourmail@example.com"
+        autocomplete="email"
+      />
+      <div *ngIf="f['email'].touched && f['email'].invalid" class="text-red-400 text-sm mt-1">
+        <span *ngIf="f['email'].errors?.['required']">Email is required.</span>
+        <span *ngIf="f['email'].errors?.['email']">Invalid email format.</span>
+      </div>
+
+      <!-- Birthdate -->
+      <label class="block mt-4 mb-1">Birthdate</label>
+      <input
+        type="date"
+        formControlName="birthdate"
+        class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2"
+      />
+      <div *ngIf="f['birthdate'].touched && f['birthdate'].invalid" class="text-red-400 text-sm mt-1">
+        <span *ngIf="f['birthdate'].errors?.['max']">Date cannot be in the future.</span>
+      </div>
+
+      <!-- Country -->
+      <label class="block mt-4 mb-1">Country</label>
+      <input
+        type="text"
+        formControlName="country"
+        class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2"
+        placeholder="Colombia, France, etc."
+        autocomplete="country-name"
+      />
+      <div *ngIf="f['country'].touched && f['country'].invalid" class="text-red-400 text-sm mt-1">
+        <span *ngIf="f['country'].errors?.['maxlength']">Maximum 80 characters.</span>
+      </div>
+
+      <!-- Passwords -->
+      <div formGroupName="passwords" class="mt-4">
+        <label class="block mb-1">Password</label>
+        <div class="relative">
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            formControlName="password"
+            class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2 pr-10"
+            placeholder="Minimum 8 characters, letters and numbers"
+            autocomplete="new-password"
+          />
+          <button type="button" (click)="togglePassword()" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-300 hover:text-white">
+            {{ showPassword ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div *ngIf="passwordCtrl?.touched && passwordCtrl?.invalid" class="text-red-400 text-sm mt-1">
+          <span *ngIf="passwordCtrl?.errors?.['required']">Password is required.</span>
+          <span *ngIf="passwordCtrl?.errors?.['minlength']">Minimum 8 characters.</span>
+          <span *ngIf="passwordCtrl?.errors?.['pattern']">Must include letters and numbers.</span>
+        </div>
+
+        <label class="block mt-4 mb-1">Confirm password</label>
+        <div class="relative">
+          <input
+            [type]="showConfirm ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            class="w-full rounded-xl bg-gray-700 border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 px-4 py-2 pr-10"
+            autocomplete="new-password"
+          />
+          <button type="button" (click)="toggleConfirm()" class="absolute right-2 top-1/2 -translate-y-1/2 text-gray-300 hover:text-white">
+            {{ showConfirm ? 'Hide' : 'Show' }}
+          </button>
+        </div>
+        <div *ngIf="pwGroup.touched && pwGroup.errors?.['passwordsMismatch']" class="text-red-400 text-sm mt-1">
+          Passwords do not match.
+        </div>
+      </div>
+
+      <!-- Terms -->
+      <label class="flex items-center gap-2 mt-4">
+        <input type="checkbox" formControlName="terms" class="rounded bg-gray-700 border-gray-600">
+        <span class="text-sm text-gray-300">I accept the terms and conditions</span>
+      </label>
+      <div *ngIf="f['terms'].touched && f['terms'].invalid" class="text-red-400 text-sm mt-1">
+        You must accept the terms.
+      </div>
+
+      <!-- Error API -->
+      <div *ngIf="apiError" class="mt-4 text-red-400 text-sm">
+        {{ apiError }}
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        [disabled]="isSubmitting || form.invalid"
+        class="mt-6 w-full bg-blue-500 hover:bg-blue-600 disabled:opacity-60 disabled:cursor-not-allowed text-white font-medium px-4 py-2 rounded-xl transition"
+      >
+        {{ isSubmitting ? 'Creating account…' : 'Create account' }}
+      </button>
+
+      <!-- Link a login -->
+      <p class="text-sm text-gray-300 mt-4 text-center">
+        Already have an account?
+        <a routerLink="/login" class="text-blue-400 hover:underline">Sign in</a>
+      </p>
+    </form>
+  </div>
+</div>

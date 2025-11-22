@@ -9,27 +9,26 @@
 
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center space-x-6">
-        <a routerLink="/" class="hover:text-blue-400 transition">Inicio</a>
-        <a routerLink="/jugar" class="hover:text-blue-400 transition">Jugar</a>
+        <!-- Público -->
+        <a routerLink="/" class="hover:text-blue-400 transition">Home</a>
+        <a routerLink="/jugar" class="hover:text-blue-400 transition">Play</a>
 
         <!-- Solo mostrar si está logueado -->
         <a *ngIf="isLoggedIn" routerLink="/ranking" class="hover:text-blue-400 transition">Ranking</a>
-        <a *ngIf="isLoggedIn" routerLink="/perfil" class="hover:text-blue-400 transition">Perfil</a>
+        <a *ngIf="isLoggedIn" routerLink="/profile" class="hover:text-blue-400 transition">Profile</a>
 
         <!-- Botones de sesión -->
-        <div class="ml-4">
-          <button *ngIf="!isLoggedIn"
-                  (click)="login()"
-                  class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-xl transition">
-            Iniciar sesión
-          </button>
+        <a *ngIf="!isLoggedIn" routerLink="/login" class="hover:text-blue-400 transition">Login</a>
+        <a *ngIf="!isLoggedIn" routerLink="/signup" class="hover:text-blue-400 transition">SignUp</a>
 
-          <button *ngIf="isLoggedIn"
-                  (click)="logout()"
-                  class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition">
-            Cerrar sesión
-          </button>
-        </div>
+        <!-- Logout (solo logueado) -->
+        <button
+          *ngIf="isLoggedIn"
+          (click)="logout()"
+          class="hover:text-blue-400 transition"
+        >
+          LogOut
+        </button>
       </div>
 
       <!-- Mobile Menu Button -->
@@ -48,21 +47,39 @@
 
   <!-- Mobile Menu -->
   <div *ngIf="isMenuOpen" class="md:hidden bg-gray-800">
-    <a routerLink="/" class="block px-4 py-2 hover:bg-gray-700">Inicio</a>
-    <a routerLink="/jugar" class="block px-4 py-2 hover:bg-gray-700">Jugar</a>
-    <a *ngIf="isLoggedIn" routerLink="/ranking" class="block px-4 py-2 hover:bg-gray-700">Ranking</a>
-    <a *ngIf="isLoggedIn" routerLink="/perfil" class="block px-4 py-2 hover:bg-gray-700">Perfil</a>
+    <!-- Público -->
+    <a routerLink="/" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Home</a>
+    <a routerLink="/jugar" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Play</a>
 
-    <button *ngIf="!isLoggedIn"
-            (click)="login()"
-            class="block w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white">
-      Iniciar sesión
-    </button>
+    <!-- Solo logueado -->
+    <a *ngIf="isLoggedIn" routerLink="/ranking" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Ranking</a>
+    <a *ngIf="isLoggedIn" routerLink="/profile" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Profile</a>
 
-    <button *ngIf="isLoggedIn"
-            (click)="logout()"
-            class="block w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white">
-      Cerrar sesión
+    <!-- Sesión -->
+    <a
+      *ngIf="!isLoggedIn"
+      routerLink="/login"
+      (click)="toggleMenu()"
+      class="block px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-center"
+    >
+      Login
+    </a>
+
+    <a
+      *ngIf="!isLoggedIn"
+      routerLink="/signup"
+      (click)="toggleMenu()"
+      class="block px-4 py-2 bg-green-500 hover:bg-green-600 text-white text-center"
+    >
+      SignUp
+    </a>
+
+    <button
+      *ngIf="isLoggedIn"
+      (click)="logout(); toggleMenu()"
+      class="block w-full px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-center"
+    >
+      LogOut
     </button>
   </div>
 </nav>

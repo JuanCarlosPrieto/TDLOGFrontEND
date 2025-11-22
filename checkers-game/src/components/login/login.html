@@ -1,27 +1,27 @@
 <div class="flex justify-center items-center h-screen bg-gray-100">
   <div class="bg-white p-8 rounded-2xl shadow-md w-96">
-    <h2 class="text-2xl font-semibold mb-6 text-center">Iniciar Sesión</h2>
+    <h2 class="text-2xl font-semibold mb-6 text-center">Sign In</h2>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <!-- Campo de correo -->
       <div class="mb-4">
-        <label class="block text-gray-700 mb-2" for="email">Correo electrónico</label>
+        <label class="block text-gray-700 mb-2" for="email">Email address</label>
         <input
           id="email"
           type="email"
           formControlName="email"
           class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-blue-200"
-          placeholder="ejemplo@correo.com"
+          placeholder="example@mail.com"
         />
         <div *ngIf="submitted && f['email'].errors" class="text-red-500 text-sm mt-1">
-          <span *ngIf="f['email'].errors['required']">El correo es obligatorio.</span>
-          <span *ngIf="f['email'].errors['email']">Correo no válido.</span>
+          <span *ngIf="f['email'].errors['required']">Email is required.</span>
+          <span *ngIf="f['email'].errors['email']">Invalid email.</span>
         </div>
       </div>
 
       <!-- Campo de contraseña -->
       <div class="mb-4">
-        <label class="block text-gray-700 mb-2" for="password">Contraseña</label>
+        <label class="block text-gray-700 mb-2" for="password">Password</label>
         <input
           id="password"
           type="password"
@@ -30,8 +30,8 @@
           placeholder="••••••••"
         />
         <div *ngIf="submitted && f['password'].errors" class="text-red-500 text-sm mt-1">
-          <span *ngIf="f['password'].errors['required']">La contraseña es obligatoria.</span>
-          <span *ngIf="f['password'].errors['minlength']">Debe tener al menos 6 caracteres.</span>
+          <span *ngIf="f['password'].errors['required']">Password is required.</span>
+          <span *ngIf="f['password'].errors['minlength']">Must be at least 6 characters.</span>
         </div>
       </div>
 
@@ -39,9 +39,8 @@
         type="submit"
         class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-all"
       >
-        Iniciar sesión
+        Sign In
       </button>
     </form>
   </div>
 </div>
-
