@@ -1,27 +1,40 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/Auth/auth-service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [CommonModule, RouterLink],
   standalone: true,
+  imports: [CommonModule, RouterLink],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.css'
+  styleUrls: ['./navbar.css']
 })
-export class Navbar {
+export class Navbar implements OnInit {
   isMenuOpen = false;
-  isLoggedIn = false; // 👈 controla si se muestra el perfil/ranking
+
+  constructor(
+    public auth: AuthService,
+    private router: Router
+  ) {}
+
+  // getter para usar en el template
+  get isLoggedIn() {
+    return this.auth.isLoggedIn;
+  }
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
 
-  login() {
-    this.isLoggedIn = true;
+  ngOnInit() {
+    // intenta restaurar sesión usando cookies
+    this.auth.checkSession().subscribe();
   }
 
   logout() {
-    this.isLoggedIn = false;
+    this.auth.logout().subscribe(() => {
+      this.router.navigate(['/']);
+    });
   }
 }
