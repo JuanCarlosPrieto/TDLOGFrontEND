@@ -1,4 +1,3 @@
-// auth-service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
@@ -23,6 +22,10 @@ export interface User {
   id: string;
   username: string;
   email: string;
+  name?: string | null;
+  surname?: string | null;
+  birthdate?: string | null;
+  country?: string | null;
 }
 
 @Injectable({
@@ -112,5 +115,12 @@ export class AuthService {
         this._currentUser = null;
       })
     );
+  }
+
+  // === UPDATE PROFILE ===
+  updateProfile(body: Partial<User>) {
+    return this.http.put<User>(`${this.baseUrl}/api/v1/auth/update`, body, {
+      withCredentials: true,
+    });
   }
 }

@@ -1,0 +1,158 @@
+<div class="min-h-screen bg-gray-100 text-gray-900 px-6 pt-24">
+  <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+    <!-- LEFT COLUMN: profile form -->
+    <div class="md:col-span-2">
+      <h1 class="text-2xl md:text-3xl font-bold text-blue-600 mb-1">My profile</h1>
+      <p class="text-gray-600 mb-8">
+        View and update your account information. Click on a field to edit.
+      </p>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate class="space-y-8">
+        <!-- Username -->
+        <div>
+          <label class="block text-sm font-medium text-gray-500 mb-1">
+            Username
+          </label>
+          <input
+            type="text"
+            formControlName="username"
+            class="w-full bg-transparent border-b border-gray-300 focus:border-blue-500 focus:outline-none px-0 py-2 text-lg"
+            placeholder="e.g. juanp"
+            autocomplete="username"
+          />
+          <div *ngIf="f['username'].touched && f['username'].invalid" class="text-red-500 text-sm mt-1">
+            <span *ngIf="f['username'].errors?.['required']">Username is required.</span>
+            <span *ngIf="f['username'].errors?.['minlength']">Must be at least 3 characters.</span>
+            <span *ngIf="f['username'].errors?.['maxlength']">Maximum 24 characters.</span>
+          </div>
+        </div>
+
+        <!-- First name -->
+        <div>
+          <label class="block text-sm font-medium text-gray-500 mb-1">
+            First name
+          </label>
+          <input
+            type="text"
+            formControlName="name"
+            class="w-full bg-transparent border-b border-gray-300 focus:border-blue-500 focus:outline-none px-0 py-2 text-lg"
+            placeholder="Your first name"
+            autocomplete="given-name"
+          />
+          <div *ngIf="f['name'].touched && f['name'].invalid" class="text-red-500 text-sm mt-1">
+            <span *ngIf="f['name'].errors?.['maxlength']">Maximum 100 characters.</span>
+          </div>
+        </div>
+
+        <!-- Last name -->
+        <div>
+          <label class="block text-sm font-medium text-gray-500 mb-1">
+            Last name
+          </label>
+          <input
+            type="text"
+            formControlName="surname"
+            class="w-full bg-transparent border-b border-gray-300 focus:border-blue-500 focus:outline-none px-0 py-2 text-lg"
+            placeholder="Your last name"
+            autocomplete="family-name"
+          />
+          <div *ngIf="f['surname'].touched && f['surname'].invalid" class="text-red-500 text-sm mt-1">
+            <span *ngIf="f['surname'].errors?.['maxlength']">Maximum 100 characters.</span>
+          </div>
+        </div>
+
+        <!-- Email (readonly) -->
+        <div>
+          <label class="block text-sm font-medium text-gray-500 mb-1">
+            Email address
+          </label>
+          <input
+            type="email"
+            formControlName="email"
+            class="w-full bg-transparent border-b border-gray-200 text-gray-600 px-0 py-2 text-lg"
+            autocomplete="email"
+            readonly
+          />
+          <p class="text-xs text-gray-500 mt-1">
+            Email cannot be changed.
+          </p>
+        </div>
+
+        <!-- Birthdate -->
+        <div>
+          <label class="block text-sm font-medium text-gray-500 mb-1">
+            Birthdate
+          </label>
+          <input
+            type="date"
+            formControlName="birthdate"
+            class="w-full bg-transparent border-b border-gray-300 focus:border-blue-500 focus:outline-none px-0 py-2 text-lg"
+          />
+          <div *ngIf="f['birthdate'].touched && f['birthdate'].invalid" class="text-red-500 text-sm mt-1">
+            <span *ngIf="f['birthdate'].errors?.['max']">Date cannot be in the future.</span>
+          </div>
+        </div>
+
+        <!-- Country -->
+        <div>
+          <label class="block text-sm font-medium text-gray-500 mb-1">
+            Country
+          </label>
+          <input
+            type="text"
+            formControlName="country"
+            class="w-full bg-transparent border-b border-gray-300 focus:border-blue-500 focus:outline-none px-0 py-2 text-lg"
+            placeholder="Colombia, France, etc."
+            autocomplete="country-name"
+          />
+          <div *ngIf="f['country'].touched && f['country'].invalid" class="text-red-500 text-sm mt-1">
+            <span *ngIf="f['country'].errors?.['maxlength']">Maximum 80 characters.</span>
+          </div>
+        </div>
+
+        <!-- API messages -->
+        <div *ngIf="apiError" class="text-red-500 text-sm">
+          {{ apiError }}
+        </div>
+        <div *ngIf="apiSuccess" class="text-green-600 text-sm">
+          {{ apiSuccess }}
+        </div>
+
+        <!-- Actions -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <button
+            type="submit"
+            [disabled]="isSubmitting || form.invalid"
+            class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-blue-500 hover:bg-blue-600 disabled:opacity-60 disabled:cursor-not-allowed text-sm font-medium text-white transition"
+          >
+            {{ isSubmitting ? 'Saving changes…' : 'Save changes' }}
+          </button>
+
+          <button
+            type="button"
+            (click)="loadProfile()"
+            class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg bg-white border border-gray-300 hover:bg-gray-50 text-sm font-medium text-gray-800 transition"
+          >
+            Reset to server data
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- RIGHT COLUMN: side info (optional) -->
+    <aside class="md:col-span-1 space-y-4 text-sm text-gray-600">
+      <div>
+        <h2 class="text-sm font-semibold text-gray-700 mb-1">Account info</h2>
+        <p>
+          Your profile is used to display your name and username in the game and in the ranking.
+        </p>
+      </div>
+      <div>
+        <h2 class="text-sm font-semibold text-gray-700 mb-1">Privacy</h2>
+        <p>
+          Your email is used only for authentication and cannot be changed from this page.
+        </p>
+      </div>
+    </aside>
+  </div>
+</div>
