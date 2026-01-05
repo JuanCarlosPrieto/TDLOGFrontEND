@@ -1,0 +1,21 @@
+.cell {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.cell.dark {
+  background: #b58863;
+}
+
+.cell.light {
+  background: #f0d9b5;
+}
+
+.cell.selected {
+  outline: 3px solid #ffd700;
+}

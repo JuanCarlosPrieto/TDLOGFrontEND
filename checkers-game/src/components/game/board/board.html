@@ -1,1 +1,10 @@
-<p>board works!</p>
+<div class="board" [class.flipped]="orientation === 'BLACK'">
+  <div class="row" *ngFor="let row of board">
+    <app-cell
+      *ngFor="let cell of row"
+      [cell]="cell"
+      [isSelected]="isCellSelected(cell)"
+      (cellClick)="onCellClick(cell)"
+    ></app-cell>
+  </div>
+</div>

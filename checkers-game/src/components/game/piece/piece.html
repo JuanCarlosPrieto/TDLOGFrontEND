@@ -1,1 +1,8 @@
-<p>piece works!</p>
+<div
+  class="piece"
+  [class.red]="piece.color === 'RED'"
+  [class.black]="piece.color === 'BLACK'"
+  [class.king]="piece.isKing"
+>
+  <span *ngIf="piece.isKing" class="crown">♕</span>
+</div>

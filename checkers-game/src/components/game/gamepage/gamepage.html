@@ -1,1 +1,26 @@
-<p>gamepage works!</p>
+<div class="game-page">
+  <h2>Checkers</h2>
+
+  <div class="status">
+    <p>
+      Current player:
+      <span
+        class="player-indicator"
+        [class.red]="currentPlayer === 'RED'"
+        [class.black]="currentPlayer === 'BLACK'"
+      >
+        {{ currentPlayer }}
+      </span>
+    </p>
+  </div>
+
+  <app-board
+    [board]="board"
+    [selectedCell]="selectedCell"
+    (cellClick)="onCellClick($event)"
+  ></app-board>
+
+  <div class="controls">
+    <button (click)="resetGame()">New game</button>
+  </div>
+</div>

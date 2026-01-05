@@ -1,0 +1,41 @@
+.game-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    sans-serif;
+}
+
+.status {
+  margin-bottom: 4px;
+}
+
+.player-indicator {
+  font-weight: bold;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: 4px;
+  color: #fff;
+}
+
+.player-indicator.red {
+  background: #c0392b;
+}
+
+.player-indicator.black {
+  background: #2c3e50;
+}
+
+.controls {
+  margin-top: 10px;
+}
+
+button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #888;
+  background: #f4f4f4;
+  cursor: pointer;
+}

@@ -1,1 +1,9 @@
-<p>cell works!</p>
+<div
+  class="cell"
+  [class.dark]="cell.playable"
+  [class.light]="!cell.playable"
+  [class.selected]="isSelected"
+  (click)="handleClick()"
+>
+  <app-piece *ngIf="cell.piece" [piece]="cell.piece"></app-piece>
+</div>

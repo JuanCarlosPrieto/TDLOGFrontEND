@@ -1,0 +1,39 @@
+<div class="playpage-container">
+  <div class="playpage-card">
+    <h1 class="title">Play Checkers</h1>
+
+    <p class="subtitle" *ngIf="state === 'idle'">
+      When you are ready, click here to find a match and start playing!
+    </p>
+
+    <p class="subtitle" *ngIf="state === 'finding'">Finding match...</p>
+    <p class="subtitle" *ngIf="state === 'waiting'">Waiting for an opponent...</p>
+
+    <p class="subtitle" *ngIf="state === 'playing'">
+      Match #{{ match?.matchid }} — You are {{ role }}
+    </p>
+
+    <button
+      class="btn-primary"
+      (click)="onFindMatch()"
+      [hidden]="state==='finding' || state==='waiting' || state==='playing'"
+    >
+      Find Match
+    </button>    
+  </div>  
+  <div>
+    <app-board
+      *ngIf="state === 'playing'"
+      [board]="board"
+      [selectedCell]="selectedCell"
+      [orientation]="playerColor"
+      (cellClick)="onCellClick($event)"
+    ></app-board>
+  </div>
+  <div class="log">
+    <div *ngFor="let l of log">{{ l }}</div>
+  </div>
+</div>
+
+
+

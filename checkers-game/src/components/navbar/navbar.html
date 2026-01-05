@@ -11,7 +11,7 @@
       <div class="hidden md:flex items-center space-x-6">
         <!-- Público -->
         <a routerLink="/" class="hover:text-blue-400 transition">Home</a>
-        <a routerLink="/jugar" class="hover:text-blue-400 transition">Play</a>
+        <a routerLink="/play" class="hover:text-blue-400 transition">Play</a>
 
         <!-- Solo mostrar si está logueado -->
         <a *ngIf="isLoggedIn" routerLink="/ranking" class="hover:text-blue-400 transition">Ranking</a>
@@ -49,7 +49,7 @@
   <div *ngIf="isMenuOpen" class="md:hidden bg-gray-800">
     <!-- Público -->
     <a routerLink="/" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Home</a>
-    <a routerLink="/jugar" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Play</a>
+    <a routerLink="/play" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Play</a>
 
     <!-- Solo logueado -->
     <a *ngIf="isLoggedIn" routerLink="/ranking" (click)="toggleMenu()" class="block px-4 py-2 hover:bg-gray-700">Ranking</a>

@@ -1,0 +1,35 @@
+:host {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.piece {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.piece.red {
+  background: #c0392b;
+}
+
+.piece.black {
+  background: #2c3e50;
+}
+
+.piece.king {
+  border: 3px solid #ffd700;
+  color: #ffd700;
+}
+
+.crown {
+  pointer-events: none;
+}
